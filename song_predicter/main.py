@@ -2,6 +2,8 @@ import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import classification_report
+import joblib
 
 df = pd.read_csv("D:/song_predicter/data/Spotify_Dataset_V3.csv", sep = ';')
 
@@ -36,9 +38,11 @@ model.fit(X_train, Y_train)
 accuracy = model.score(X_test, Y_test)
 print(accuracy)
 
-from sklearn.metrics import classification_report
-
 Y_pred = model.predict(X_test)
 print(classification_report(Y_test, Y_pred))
+
+joblib.dump(model, 'D:/song_predicter/data/model.pkl')
+
+joblib.dump(scaler, 'scaler.pkl')
 
 
